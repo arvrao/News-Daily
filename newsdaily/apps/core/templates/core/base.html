@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top News</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">NEWS DAILY</a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item">
+                    <form action="{% url 'search' %}" method="GET">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input type="text" class="input" placeholder="search..." name="query">
+                            </div>
+
+                            <div class="control">
+                                <button class="button is-success">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="navbar-end">
+                <a href="{% url 'latest' %}" class="navbar-item">Latest posts</a>
+                <a href="{% url 'write_story' %}" class="navbar-item  button is-success  is-outlined">Write a story</a>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <!-- check if usesr is signed up --> 
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}" class="button is-danger">Log Out</a>
+                        {% else %}
+                        <a href="{% url 'signup' %}" class="button is-success">
+                            <strong>SIGN UP</strong>
+                        </a>
+                        <a href="{% url 'login' %}" class="button -s-light">Log In</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        {% block content %}
+        {% endblock %}
+    </section>
+    
+    
+</body>
+</html>
