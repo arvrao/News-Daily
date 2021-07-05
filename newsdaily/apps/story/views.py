@@ -22,13 +22,13 @@ def latest(request):
 def vote(request, story_id):
     story = get_object_or_404(Story, pk=story_id)
 
-    next_page = request.GET.get('next_page', '')
+#     next_page = request.GET.get('next_page', '')
     if story.created_by != request.user and not Vote.objects.filter(created_by=request.user, Story=story):
         vote = Vote.objects.create(Story=story, created_by = request.user)
     
 
-    if next_page == 'story':
-        return redirect('story', story_id=story_id)
+#     if next_page == 'story':
+        return redirect('main')
     
     else:
         return redirect('main')
